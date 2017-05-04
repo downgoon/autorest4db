@@ -6,6 +6,8 @@ automatically generate a RESTful API of your database (sqlite3 or mysql) in runt
 
 ###  Install and start
 
+#### for any platform
+
 download [autorest4db-0.1.1.tar.gz](https://github.com/downgoon/autorest4db/releases/download/0.1.1/autorest4db-0.1.1.tar.gz) and decompress it
 
 ``` bash
@@ -30,6 +32,16 @@ mvn clean package
 
 >REQUIREMENT
 > - JDK8 +
+
+#### for Mac platform (64bit)
+
+- download [autorest4db-0.1.1.pkg](https://github.com/downgoon/autorest4db/releases/download/0.1.1/autorest4db-0.1.1.pkg)
+- double click it and install
+- ``autorest4db start``
+
+![autorest4db install package on Mac](https://cloud.githubusercontent.com/assets/23731186/25697137/58f7bfbc-30ec-11e7-8afd-4db334227efa.png)
+
+---
 
 ### Create dababase and tables
 
