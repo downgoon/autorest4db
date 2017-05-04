@@ -11,7 +11,7 @@ automatically generate a RESTful API of your database (sqlite3 or mysql) in runt
 download [autorest4db-0.1.1.tar.gz](https://github.com/downgoon/autorest4db/releases/download/0.1.1/autorest4db-0.1.1.tar.gz) and decompress it
 
 ``` bash
-$ wget autorest4db-0.1.1.tar.gz
+$ wget https://github.com/downgoon/autorest4db/releases/download/0.1.1/autorest4db-0.1.1.tar.gz
 $ tar zxvf autorest4db-0.1.1.tar.gz
 $ cd autorest4db-0.1.1
 $ bin/autorest4db start
