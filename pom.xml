@@ -4,11 +4,35 @@
 
 	<groupId>io.downgoon</groupId>
 	<artifactId>autorest4db</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>autorest4db</name>
-	<url>http://maven.apache.org</url>
+	<description>
+automatically generate a RESTful API of your database (sqlite3 or mysql) in runtime.</description>
+	<url>https://github.com/downgoon/autorest4db</url>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git@github.com:downgoon/autorest4db.git</connection>
+		<developerConnection>scm:git:git@github.com:downgoon/autorest4db.git</developerConnection>
+		<url>http://github.com/downgoon/autorest4db</url>
+		<tag>autorest4db-0.1.1</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>downgoon</id>
+			<name>downgoon</name>
+			<email>downgoon@qq.com</email>
+		</developer>
+	</developers>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -97,6 +121,112 @@
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.7</version>
+				<configuration>
+					<configurationDirectory>conf</configurationDirectory>
+					<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+					<repositoryLayout>flat</repositoryLayout>
+					<useWildcardClassPath>true</useWildcardClassPath>
+					<daemons>
+						<daemon>
+							<id>${project.name}</id>
+							<mainClass>io.downgoon.autorest4db.AutoRestMain</mainClass>
+							<commandLineArguments>
+								<commandLineArgument>start</commandLineArgument>
+							</commandLineArguments>
+							<platforms>
+								<platform>jsw</platform>
+							</platforms>
+							<jvmSettings>
+
+								<maxStackSize>128</maxStackSize>
+								<systemProperties>
+									<systemProperty>APP_HOME=.</systemProperty>
+								</systemProperties>
+
+								<extraArguments>
+									<extraArgument>-server</extraArgument>
+									<extraArgument>-XX:MaxPermSize=64M</extraArgument>
+									<extraArgument>-Xms1G</extraArgument>
+									<extraArgument>-Xmx2G</extraArgument>
+								</extraArguments>
+
+							</jvmSettings>
+							<generatorConfigurations>
+								<generatorConfiguration>
+									<generator>jsw</generator>
+									<includes>
+										<include>aix-ppc-32</include>
+										<include>aix-ppc-64</include>
+										<include>hpux-parisc-64</include>
+										<include>linux-x86-32</include>
+										<include>linux-x86-64</include>
+										<include>linux-ppc-64</include>
+										<include>macosx-ppc-32</include>
+										<include>macosx-x86-universal-32</include>
+										<include>macosx-universal-32</include>
+										<include>macosx-universal-64</include>
+										<include>solaris-sparc-32</include>
+										<include>solaris-sparc-64</include>
+										<include>solaris-x86-32</include>
+										<include>windows-x86-32</include>
+										<include>windows-x86-64</include>
+									</includes>
+
+									<configuration>
+										<property>
+											<name>configuration.directory.in.classpath.first</name>
+											<value>conf</value>
+										</property>
+										<property>
+											<name>set.default.REPO_DIR</name>
+											<value>lib</value>
+										</property>
+										<property>
+											<name>wrapper.logfile</name>
+											<value>logs/${project.name}.log</value>
+										</property>
+									</configuration>
+
+								</generatorConfiguration>
+							</generatorConfigurations>
+						</daemon>
+
+					</daemons>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-jsw</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate-daemons</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- package tar.gz -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>

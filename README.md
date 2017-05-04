@@ -6,7 +6,30 @@ automatically generate a RESTful API of your database (sqlite3 or mysql) in runt
 
 ###  Install and start
 
-run ``AutoRestMain.java``
+download [autorest4db-0.1.1.tar.gz](https://github.com/downgoon/autorest4db/releases/download/0.1.1/autorest4db-0.1.1.tar.gz) and decompress it
+
+``` bash
+$ wget autorest4db-0.1.1.tar.gz
+$ tar zxvf autorest4db-0.1.1.tar.gz
+$ cd autorest4db-0.1.1
+$ bin/autorest4db start
+```
+
+in IDE (such as Eclipse), just run ``AutoRestMain.java``
+
+BTW, how to build and package ?
+
+``` bash
+git clone https://github.com/downgoon/autorest4db.git
+cd autorest4db
+mvn clean package
+```
+
+``autorest4db-0.1.1.tar.gz`` will be generated in the ``target`` directory.
+
+
+>REQUIREMENT
+> - JDK8 +
 
 ### Create dababase and tables
 
@@ -125,7 +148,7 @@ Content-Length: 48
 
 - **update entity**
 
-update employee=99 
+update employee=99
 
 ``` bash
 $ curl -X PUT -i -d '{"name": "wangyiV2", "age": 32 }' -H "Content-Type: application/json" http://localhost:8080/dbapi/default/employee/99
@@ -156,7 +179,7 @@ Not Found%
 
 - **composite keys**
 
-```
+``` bash
 $ curl -i -X GET http://localhost:8080/dbapi/default/friend
 HTTP/1.1 200 OK
 Server: autorest4db
@@ -175,4 +198,3 @@ Content-Length: 42
 ```
 
 the composite key value '1001-1032' would be split into '1001' assigned to 'user_id' and '1032' assigned to 'frie_id'.
-
