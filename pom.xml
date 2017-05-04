@@ -4,7 +4,7 @@
 
 	<groupId>io.downgoon</groupId>
 	<artifactId>autorest4db</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2-SHAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>autorest4db</name>
